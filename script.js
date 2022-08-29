@@ -10,7 +10,6 @@ const displayBooks = (books) => {
     const booksContainer = document.getElementById("books");
     booksContainer.innerHTML = "";
     books.forEach(book => {
-        console.log(book);
         const { title, author_name, author_key, cover_i, first_publish_year, publish_place, publisher } = book;
         // destructuring
         const column = document.createElement("div");
@@ -43,7 +42,6 @@ const loadauthorInfo = authorKey => {
 // displaying autor information in modal
 const displayAuthor = authorData => {
     const { name, birth_date, photos, remote_ids, bio } = authorData;
-    console.log(photos);
     let authorImg = "";
     if (photos) {
         const authorImgUrl = `https://covers.openlibrary.org/a/id/${photos[0]}-S.jpg`;
