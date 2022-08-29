@@ -1,9 +1,16 @@
 // fetching openlibrary api using search input value dynamically
 const search = () => {
     const searchField = document.getElementById("search-field").value;
-    fetch(`https://openlibrary.org/search.json?title=${searchField}&limit=9`)
-        .then(response => response.json())
-        .then(books => displayBooks(books.docs));
+    // validation before fetching
+    if (searchField === "") {
+        document.getElementById("error").innerHTML = "<h2 class='text-center  text-warning'>Please provide a book name</h2>";
+    } else {
+        document.getElementById("error").style.display = "none";
+        fetch(`https://openlibrary.org/search.json?title=${searchField}&limit=9`)
+            .then(response => response.json())
+            .then(books => displayBooks(books.docs));
+    }
+
 }
 // displaying books frontend from fetching information
 const displayBooks = (books) => {
@@ -22,8 +29,8 @@ const displayBooks = (books) => {
             <div class="card-body">
                 <h5 class="card-title">${title}</h5>
                 <p class="card-text">Author : ${author_name[0]} </p>
-                <p class="card-text">Published : ${first_publish_year} in ${publish_place}</p>
-                <p>Publishers : ${publisher}</p>
+                <p class="card-text">Published : ${first_publish_year} in ${publish_place ? publish_place[0] : "n/a"}</p>
+                <p>Publishers : ${publisher ? publisher[0] : "n/a"}</p>
                 <button class="btn btn-success" onclick="loadauthorInfo('${author_key[0]}')" data-bs-toggle="modal" data-bs-target="#exampleModal">Details of Author</button>
             </div>
         </div>
