@@ -1,7 +1,7 @@
 // fetching openlibrary api using search input value dynamically
 const search = () => {
     const searchField = document.getElementById("search-field").value;
-    fetch(`http://openlibrary.org/search.json?title=${searchField}&limit=9`)
+    fetch(`https://openlibrary.org/search.json?title=${searchField}&limit=9`)
         .then(response => response.json())
         .then(books => displayBooks(books.docs));
 }
