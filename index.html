@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Books</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -33,6 +34,15 @@
             </div>
         </div>
         <div id="error"></div>
+
+        <div id="loading" class="my-3 container bg-light py-5 px-5">
+            <div class="d-flex align-items-center">
+                <h2>Searching Books ...</h2>
+                <div class="spinner-border ms-auto" role="status" aria-hidden="true" style="width: 3rem; height: 3rem;">
+                </div>
+            </div>
+        </div>
+
         <!-- Showing books in grid -->
         <div class="row row-cols-1 row-cols-md-3 g-4 my-2" id="books">
 

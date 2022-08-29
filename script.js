@@ -3,10 +3,13 @@ const search = () => {
     const searchField = document.getElementById("search-field").value;
     // validation before fetching
     if (searchField === "") {
+        document.getElementById("error").style.display = "block";
+        document.getElementById("books").innerHTML = "";
         document.getElementById("error").innerHTML = "<h2 class='text-center  text-warning'>Please provide a book name</h2>";
     } else {
+        document.getElementById("loading").style.display = "block";
         document.getElementById("error").style.display = "none";
-        fetch(`https://openlibrary.org/search.json?title=${searchField}&limit=9`)
+        fetch(`https://openlibrary.org/search.json?title=${searchField}&limit=50`)
             .then(response => response.json())
             .then(books => displayBooks(books.docs));
     }
@@ -14,8 +17,11 @@ const search = () => {
 }
 // displaying books frontend from fetching information
 const displayBooks = (books) => {
+    books = books.slice(0, 21);
+    document.getElementById("loading").style.display = "none";
     const booksContainer = document.getElementById("books");
     booksContainer.innerHTML = "";
+    booksContainer.innerHTML += `<div class=col-md-12><h2 class="text-center">Found ${books.length - 1} books</h2></div>`;
     books.forEach(book => {
         const { title, author_name, author_key, cover_i, first_publish_year, publish_place, publisher } = book;
         // destructuring
@@ -24,6 +30,7 @@ const displayBooks = (books) => {
         const imgUrl = `https://covers.openlibrary.org/b/id/${cover_i}-L.jpg`;
 
         column.innerHTML = `
+        
         <div class="card">
             <img src="${imgUrl}" class="card-img-top" alt="...">
             <div class="card-body">
@@ -35,6 +42,7 @@ const displayBooks = (books) => {
             </div>
         </div>
         `
+
         booksContainer.appendChild(column);
 
     });
