@@ -1,9 +1,11 @@
+// fetching openlibrary api using search input value dynamically
 const search = () => {
     const searchField = document.getElementById("search-field").value;
     fetch(`http://openlibrary.org/search.json?title=${searchField}&limit=9`)
         .then(response => response.json())
         .then(books => displayBooks(books.docs));
 }
+// displaying books frontend from fetching information
 const displayBooks = (books) => {
     const booksContainer = document.getElementById("books");
     booksContainer.innerHTML = "";
@@ -31,12 +33,14 @@ const displayBooks = (books) => {
 
     });
 }
+// loading author infoormation
 const loadauthorInfo = authorKey => {
     const authorInfoUrl = `https://openlibrary.org/authors/${authorKey}.json`;
     fetch(authorInfoUrl)
         .then(response => response.json())
         .then(authorData => displayAuthor(authorData));
 }
+// displaying autor information in modal
 const displayAuthor = authorData => {
     const { name, birth_date, photos, remote_ids, bio } = authorData;
     console.log(photos);
