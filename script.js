@@ -17,11 +17,11 @@ const search = () => {
 }
 // displaying books frontend from fetching information
 const displayBooks = (books) => {
-    books = books.slice(0, 21);
+    books = books.slice(0, 20);
     document.getElementById("loading").style.display = "none";
     const booksContainer = document.getElementById("books");
     booksContainer.innerHTML = "";
-    booksContainer.innerHTML += `<div class=col-md-12><h2 class="text-center">Found ${books.length - 1} books</h2></div>`;
+    booksContainer.innerHTML += `<div class=col-md-12><h2 class="text-center">Found ${books.length} books</h2></div>`;
     books.forEach(book => {
         const { title, author_name, author_key, cover_i, first_publish_year, publish_place, publisher } = book;
         // destructuring
@@ -71,7 +71,7 @@ const displayAuthor = authorData => {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-       <p><strong>Birth Date : </strong> ${birth_date}</p>
+       <p><strong>Birth Date : </strong> ${birth_date ? birth_date : "n/a"}</p>
        <p><strong>Wiki : </strong> <a href="https://www.wikidata.org/wiki/${remote_ids ? remote_ids.wikidata : 'n/a'}">${name}</a> </p>
        <p>Bio : ${bio ? bio.value : "n/a"} </p>
     </div>
